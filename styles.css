@@ -54,3 +54,6 @@
 .leaderboard-list li{padding:10px 12px;background:#f8f7fc;border-radius:12px}
 .leaderboard-list li span{font-weight:700;display:block}
 .leaderboard-list li small{color:var(--muted)}
+
+/* Login and role based access */
+.logged-out .topbar nav,.logged-out .student-pill,.logged-out footer{display:none!important}.login-view{min-height:calc(100vh - 130px);display:flex;align-items:center;justify-content:center;padding:30px 0}.login-card{width:min(440px,100%);background:white;border:1px solid var(--border);border-radius:24px;padding:34px;box-shadow:0 20px 60px #29204a12}.login-card h1{font-family:'Space Grotesk';font-size:38px;margin:8px 0}.login-card label{display:block;font-weight:700;font-size:13px;margin:16px 0}.login-card input{display:block;width:100%;margin-top:8px;padding:12px;border:1px solid var(--border);border-radius:10px}.login-error{color:#d34b61;min-height:20px;font-size:13px}.demo-accounts{margin-top:22px;padding:14px;background:#f7f6fc;border-radius:12px;font-size:13px}.demo-accounts p{margin:6px 0;color:var(--muted)}.logout-btn{background:transparent;color:var(--purple);font-size:12px;margin-left:8px;font-weight:700;padding:0}
