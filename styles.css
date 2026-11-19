@@ -90,3 +90,5 @@
 .admin-only main>.view{display:none!important}
 .admin-only #admin-view{display:block!important}
 .admin-only #login-view{display:none!important}
+
+.student-nav{display:none;gap:8px}.student-only .student-nav{display:flex}.student-only #admin-nav,.student-only #admin-view{display:none!important}.student-only main>.view{display:none!important}.student-only main>.view.active{display:block!important}.student-only #login-view{display:none!important}.student-only .topbar nav .nav-btn{border:0;background:transparent;padding:10px 14px;border-radius:10px;color:var(--muted);font-weight:700}.student-only .topbar nav .nav-btn.active{background:#f0ecff;color:var(--purple)}.student-only #add-assignment-btn,.student-only #empty-add-btn{display:none!important}
