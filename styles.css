@@ -92,3 +92,24 @@
 .admin-only #login-view{display:none!important}
 
 .student-nav{display:none;gap:8px}.student-only .student-nav{display:flex}.student-only #admin-nav,.student-only #admin-view{display:none!important}.student-only main>.view{display:none!important}.student-only main>.view.active{display:block!important}.student-only #login-view{display:none!important}.student-only .topbar nav .nav-btn{border:0;background:transparent;padding:10px 14px;border-radius:10px;color:var(--muted);font-weight:700}.student-only .topbar nav .nav-btn.active{background:#f0ecff;color:var(--purple)}.student-only #add-assignment-btn,.student-only #empty-add-btn{display:none!important}
+/* Admin student profiles, activity feed, and game views */
+.student-row-button{width:100%;text-align:left;border:0;background:var(--card,#fff);cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:16px;border-radius:12px;margin:8px 0;color:inherit}
+.student-row-button:hover{transform:translateY(-1px);box-shadow:0 6px 20px #00000010}
+.student-profile{margin-top:20px;padding:22px;border:1px solid var(--border,#e7e7e7);border-radius:18px;background:var(--card,#fff)}
+.profile-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0}
+.profile-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.profile-assignment{border:1px solid var(--border,#e7e7e7);padding:14px;border-radius:12px;margin:10px 0}
+.profile-assignment h4{margin:0 0 8px}
+.pending-badge,.checked-badge,.submission-status{display:inline-block;padding:5px 10px;border-radius:999px;background:#fff3d6;color:#805b00;font-size:12px;font-weight:700}
+.checked-badge{background:#e6f8ec;color:#18743b}
+.submission-info{margin-top:12px;padding:12px;background:#f7f8fa;border-radius:10px}
+.activity-item{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border,#e7e7e7)}
+.activity-item small{color:var(--muted);white-space:nowrap}
+.admin-game-card{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:center;padding:20px;border:1px solid var(--border,#e7e7e7);border-radius:18px;background:var(--card,#fff)}
+.admin-game-card .game-art{min-height:150px}
+.countdown-overlay{position:absolute;inset:0;z-index:20;display:grid;place-items:center;background:#10172bcc;border-radius:inherit;color:white}
+.countdown-overlay strong{font-size:clamp(4rem,15vw,9rem);animation:countdown-pop .7s ease}
+.game-question{position:relative}
+@keyframes countdown-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:1}}
+#student-assignment-modal .modal{max-width:560px}
+@media(max-width:700px){.profile-columns{grid-template-columns:1fr}.profile-header{align-items:flex-start;flex-direction:column}.admin-game-card{grid-template-columns:1fr}.activity-item{flex-direction:column;gap:4px}}
