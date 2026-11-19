@@ -22,3 +22,13 @@
 .game-board-wrap{min-height:auto}
 @keyframes flash{from{opacity:1}to{opacity:0}}
 @media(max-width:760px){.shooting-field{height:390px}.pointer-customization{grid-template-columns:1fr}.targets{inset:0}.target-answer{width:72px;height:72px}}
+
+/* Full-screen random target spawning */
+.game-board-wrap{padding:0;border:0;background:transparent}
+.shooting-field{width:100%;max-width:none;height:min(72vh,760px);min-height:520px;margin:18px 0 14px;border-radius:24px;overflow:hidden}
+.target-answer{animation:targetSpawn .18s ease-out both}
+.target-answer.spawn{animation:targetSpawn .18s ease-out both}
+@keyframes targetSpawn{from{opacity:0;transform:scale(.35)}to{opacity:1;transform:scale(1)}}
+.game-question{padding:16px 0 8px}
+.game-controls{background:white;border:1px solid var(--border);border-radius:18px;padding:18px;margin-bottom:24px}
+@media(max-width:760px){.shooting-field{height:68vh;min-height:440px;border-radius:18px}.game-board-wrap{padding:0}.game-controls{margin-bottom:20px}}
