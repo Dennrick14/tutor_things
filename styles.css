@@ -113,3 +113,6 @@
 @keyframes countdown-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:1}}
 #student-assignment-modal .modal{max-width:560px}
 @media(max-width:700px){.profile-columns{grid-template-columns:1fr}.profile-header{align-items:flex-start;flex-direction:column}.admin-game-card{grid-template-columns:1fr}.activity-item{flex-direction:column;gap:4px}}
+
+/* Ensure the login screen is the only portal shown while logged out */
+.logged-out #admin-view,.logged-out #admin-nav,.logged-out #student-nav,.logged-out .student-pill{display:none!important}
