@@ -86,3 +86,7 @@
 .logged-out main>.view{display:none!important}
 .logged-out #login-view{display:flex!important}
 @media(max-width:760px){.admin-nav{gap:2px}.admin-tab{padding:8px 10px;font-size:13px}.admin-stat-grid{grid-template-columns:1fr}.admin-view{padding:0 4px}}
+
+.admin-only main>.view{display:none!important}
+.admin-only #admin-view{display:block!important}
+.admin-only #login-view{display:none!important}
