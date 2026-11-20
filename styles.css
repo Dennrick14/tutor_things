@@ -123,3 +123,20 @@
 body.logged-out #admin-nav,body.logged-out #student-nav,body.logged-out .student-pill,body.logged-out #admin-view,body.logged-out main>.view,body.logged-out footer{display:none!important;}
 body.logged-out #login-view{display:flex!important;}
 body.logged-out #login-form button{opacity:1;}
+
+/* Explicit role navigation and portal visibility */
+body.admin-only #admin-nav{display:flex!important;pointer-events:auto!important;}
+body.admin-only #student-nav{display:none!important;}
+body.admin-only #admin-view{display:block!important;pointer-events:auto!important;}
+body.admin-only .student-pill{display:flex!important;}
+body.admin-only #login-view{display:none!important;}
+body.admin-only main>.view{display:none!important;}
+body.student-only #admin-nav{display:none!important;}
+body.student-only #student-nav{display:flex!important;}
+body.student-only #admin-view{display:none!important;}
+body.student-only .student-pill{display:flex!important;}
+body.student-only #login-view{display:none!important;}
+body.student-only main>.view{display:none!important;}
+body.student-only main>.view.active{display:block!important;}
+body.admin-only .admin-tab{pointer-events:auto;position:relative;z-index:5;}
+body.admin-only .admin-panel.active{display:block!important;}
