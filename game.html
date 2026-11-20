@@ -8,19 +8,96 @@
 <div class="row" style="margin-top:24px"><label>Pointer color<select id="color"><option value="#ff4d6d">Pink</option><option value="#55d6ff">Blue</option><option value="#7cff8a">Green</option><option value="#ffffff">White</option></select></label><label>Pointer size<select id="size"><option value="24">Small</option><option value="34" selected>Medium</option><option value="46">Large</option></select></label><label>Pointer style<select id="style"><option value="cross">Crosshair</option><option value="circle">Circle</option><option value="dot">Dot</option></select></label></div><div class="preview" id="preview"><span id="aim" class="cross">＋</span></div><button class="primary" id="start">Start shooting 🚀</button></section>
 <section id="play"><div class="board"><div class="top"><span id="qnum">Question 1</span><span>Score: <b id="score">0</b></span></div><h2 id="question">2 × 3 = ?</h2><p>Click the correct answer target!</p><div class="stats">Shots <b id="shots">0</b> · Hits <b id="hits">0</b> · Streak <b id="streak">0</b></div></div><div class="field" id="field"><div class="overlay" id="overlay"><div><h2 id="overlayTitle">Ready?</h2><p id="overlayText">Click start when you're ready.</p><button class="primary" id="overlayButton">Start game</button></div></div></div><button class="primary" id="quit">Back to setup</button></section>
 </main><script>
-let selected=['mix'],count=10,mode='random',questions=[],index=0,score=0,shots=0,hits=0,streak=0,motion=null;
-const $=id=>document.getElementById(id),tables=$('tables');
-for(let n=2;n<=20;n++){const b=document.createElement('button');b.className='btn';b.textContent=n;b.onclick=()=>{selected=selected.filter(x=>x!=='mix');selected.includes(n)?selected=selected.filter(x=>x!==n):selected.push(n);if(!selected.length)selected=['mix'];renderTables()};tables.appendChild(b)}
-const mix=document.createElement('button');mix.className='btn';mix.textContent='Mix all tables (2–20)';mix.onclick=()=>{selected=['mix'];renderTables()};tables.appendChild(mix);
-function renderTables(){[...tables.children].forEach(b=>b.classList.toggle('selected',b.textContent==='Mix all tables (2–20)'?selected.includes('mix'):selected.includes(Number(b.textContent))))}renderTables();
-document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('selected',x===b))});
-document.querySelectorAll('[data-count]').forEach(b=>b.onclick=()=>{count=Number(b.dataset.count);document.querySelectorAll('[data-count]').forEach(x=>x.classList.toggle('selected',x===b))});
-function pointer(){const p=$('aim');p.style.color=$('color').value;p.style.fontSize=$('size').value+'px';p.textContent=$('style').value==='dot'?'●':$('style').value==='circle'?'◯':'＋'}['color','size','style'].forEach(id=>$(id).onchange=pointer);pointer();
-function makeQ(){let ts=selected.includes('mix')?Array.from({length:19},(_,i)=>i+2):selected;let a=ts[Math.floor(Math.random()*ts.length)],b=1+Math.floor(Math.random()*12);return {a,b,ans:a*b}}
-function start(){questions=Array.from({length:count},makeQ);index=0;score=shots=hits=streak=0;$('setup').style.display='none';$('play').style.display='block';showReady()}
-function showReady(){ $('overlay').classList.remove('hidden');$('overlayTitle').textContent='Ready?';$('overlayText').textContent='Click start when you are ready.';$('overlayButton').textContent='Start game';$('overlayButton').onclick=()=>{$('overlay').classList.add('hidden');nextQ()}}
-function nextQ(){if(index>=questions.length){finish();return}const q=questions[index];$('qnum').textContent='Question '+(index+1)+' / '+count;$('question').textContent=q.a+' × '+q.b+' = ?';$('field').querySelectorAll('.target').forEach(x=>x.remove());let vals=new Set([q.ans]);while(vals.size<6){let v=Math.max(1,q.ans+Math.floor(Math.random()*31)-15);vals.add(v)}let arr=[...vals].sort(()=>Math.random()-.5);arr.forEach(v=>{let b=document.createElement('button');b.className='target';b.textContent=v;b.style.left=Math.random()*82+'%';b.style.top=Math.random()*75+'%';b.onclick=()=>{shots++;if(v===q.ans){hits++;score+=100+streak*10;streak++;b.textContent='✓';b.style.background='#7cff8a';setTimeout(()=>{index++;nextQ()},350)}else{streak=0;b.style.background='#ff6b6b';b.disabled=true}update()};$('field').appendChild(b)});if(mode==='gliding'){clearInterval(motion);motion=setInterval(()=>document.querySelectorAll('.target:not(:disabled)').forEach(t=>{t.style.left=Math.max(0,Math.min(82,parseFloat(t.style.left)+(Math.random()*4-2)))+'%';t.style.top=Math.max(0,Math.min(75,parseFloat(t.style.top)+(Math.random()*4-2)))+'%'}),180)}}
-function update(){$('score').textContent=score;$('shots').textContent=shots;$('hits').textContent=hits;$('streak').textContent=streak}
-function finish(){clearInterval(motion);$('overlay').classList.remove('hidden');$('overlayTitle').textContent='Game complete!';$('overlayText').textContent='Score: '+score+' · Accuracy: '+(shots?Math.round(hits/shots*100):0)+'%';$('overlayButton').textContent='Play again';$('overlayButton').onclick=start}
-$('start').onclick=start;$('quit').onclick=()=>{clearInterval(motion);$('play').style.display='none';$('setup').style.display='block'};
+(() => {
+  const $ = id => document.getElementById(id);
+  let selectedTables = ['mix'], questionCount = 10, movement = 'random';
+  let questions = [], current = 0, score = 0, shots = 0, hits = 0, streak = 0, timer = null;
+  const tableContainer = $('tables');
+
+  function renderTables() {
+    tableContainer.innerHTML = '';
+    for (let n=2;n<=20;n++) {
+      const button=document.createElement('button');
+      button.type='button'; button.className='btn'; button.textContent=n;
+      button.classList.toggle('selected',selectedTables.includes(n));
+      button.addEventListener('click',()=>{
+        selectedTables=selectedTables.filter(x=>x!=='mix');
+        if(selectedTables.includes(n)) selectedTables=selectedTables.filter(x=>x!==n);
+        else selectedTables.push(n);
+        if(!selectedTables.length) selectedTables=['mix'];
+        renderTables();
+      });
+      tableContainer.appendChild(button);
+    }
+    const mix=document.createElement('button');
+    mix.type='button';mix.className='btn';mix.textContent='Mix all tables (2–20)';
+    mix.classList.toggle('selected',selectedTables.includes('mix'));
+    mix.addEventListener('click',()=>{selectedTables=['mix'];renderTables();});
+    tableContainer.appendChild(mix);
+  }
+  renderTables();
+
+  document.querySelectorAll('[data-mode]').forEach(button=>button.addEventListener('click',()=>{
+    movement=button.dataset.mode;
+    document.querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('selected',b===button));
+  }));
+  document.querySelectorAll('[data-count]').forEach(button=>button.addEventListener('click',()=>{
+    questionCount=Number(button.dataset.count);
+    document.querySelectorAll('[data-count]').forEach(b=>b.classList.toggle('selected',b===button));
+  }));
+  function updatePointer(){
+    const aim=$('aim'); aim.style.color=$('color').value; aim.style.fontSize=$('size').value+'px';
+    aim.textContent=$('style').value==='dot'?'●':$('style').value==='circle'?'◯':'＋';
+  }
+  ['color','size','style'].forEach(id=>$(id).addEventListener('change',updatePointer));
+  updatePointer();
+  function makeQuestion(){
+    const tables=selectedTables.includes('mix')?Array.from({length:19},(_,i)=>i+2):selectedTables;
+    const a=tables[Math.floor(Math.random()*tables.length)],b=1+Math.floor(Math.random()*12);
+    return {a,b,answer:a*b};
+  }
+  function start(){
+    clearInterval(timer); questions=Array.from({length:questionCount},makeQuestion);
+    current=0;score=shots=hits=streak=0;
+    $('setup').style.display='none';$('play').style.display='block';ready();
+  }
+  function ready(){
+    $('overlay').classList.remove('hidden');$('overlayTitle').textContent='Ready?';
+    $('overlayText').textContent='Click start when you are ready.';$('overlayButton').textContent='Start game';
+    $('overlayButton').onclick=()=>{$('overlay').classList.add('hidden');nextQuestion();};
+  }
+  function updateStats(){
+    $('score').textContent=score;$('shots').textContent=shots;$('hits').textContent=hits;$('streak').textContent=streak;
+  }
+  function nextQuestion(){
+    clearInterval(timer);
+    if(current>=questions.length){finish();return;}
+    const q=questions[current];$('qnum').textContent='Question '+(current+1)+' / '+questionCount;
+    $('question').textContent=q.a+' × '+q.b+' = ?';
+    document.querySelectorAll('.target').forEach(t=>t.remove());
+    const answers=new Set([q.answer]);
+    while(answers.size<6) answers.add(Math.max(1,q.answer+Math.floor(Math.random()*31)-15));
+    [...answers].sort(()=>Math.random()-.5).forEach(value=>{
+      const target=document.createElement('button');target.type='button';target.className='target';target.textContent=value;
+      target.style.left=Math.random()*82+'%';target.style.top=Math.random()*75+'%';
+      target.addEventListener('click',()=>{
+        shots++;
+        if(value===q.answer){hits++;score+=100+streak*10;streak++;target.textContent='✓';target.style.background='#7cff8a';updateStats();setTimeout(()=>{current++;nextQuestion();},350);}
+        else{streak=0;target.style.background='#ff6b6b';target.disabled=true;updateStats();}
+      });
+      $('field').appendChild(target);
+    });
+    if(movement==='gliding') timer=setInterval(()=>document.querySelectorAll('.target:not(:disabled)').forEach(t=>{
+      t.style.left=Math.max(0,Math.min(82,parseFloat(t.style.left)+(Math.random()*4-2)))+'%';
+      t.style.top=Math.max(0,Math.min(75,parseFloat(t.style.top)+(Math.random()*4-2)))+'%';
+    }),180);
+  }
+  function finish(){
+    clearInterval(timer);$('overlay').classList.remove('hidden');$('overlayTitle').textContent='Game complete!';
+    $('overlayText').textContent='Score: '+score+' · Accuracy: '+(shots?Math.round(hits/shots*100):0)+'%';
+    $('overlayButton').textContent='Play again';$('overlayButton').onclick=start;
+  }
+  $('start').addEventListener('click',start);
+  $('quit').addEventListener('click',()=>{clearInterval(timer);$('play').style.display='none';$('setup').style.display='block';});
+})();
 </script></body></html>
