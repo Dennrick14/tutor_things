@@ -155,3 +155,12 @@ body.admin-only main>#game-detail-view.active{display:block!important;pointer-ev
 body.admin-only main>#game-detail-view.active *{pointer-events:auto;}
 body.admin-only main>#game-detail-view.active .back-btn{pointer-events:auto!important;}
 body.admin-only .student-pill{display:flex!important;pointer-events:auto!important;position:relative;z-index:30;}
+
+/* TEMPORARY GAME FIRST MODE: keep portal code intact, hide its interface */
+body.admin-only #admin-nav,body.student-only #student-nav{display:none!important;}
+body.admin-only #admin-view,body.student-only #admin-view{display:none!important;}
+body.admin-only main>.view,body.student-only main>.view{display:none!important;}
+body.admin-only main>#setup-view.active,body.student-only main>#setup-view.active{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative;z-index:2;}
+body.admin-only main>#setup-view.active *,body.student-only main>#setup-view.active *{pointer-events:auto!important;}
+body.admin-only main>#game-view.active,body.student-only main>#game-view.active,body.admin-only main>#results-view.active,body.student-only main>#results-view.active,body.admin-only main>#game-detail-view.active,body.student-only main>#game-detail-view.active{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative;z-index:2;}
+body.admin-only main>.view.active,body.student-only main>.view.active{display:block!important;}
