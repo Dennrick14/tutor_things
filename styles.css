@@ -140,3 +140,18 @@ body.student-only main>.view{display:none!important;}
 body.student-only main>.view.active{display:block!important;}
 body.admin-only .admin-tab{pointer-events:auto;position:relative;z-index:5;}
 body.admin-only .admin-panel.active{display:block!important;}
+
+/* Correct admin portal interaction and allow admin game records view */
+html,body{min-height:100%;}
+body.admin-only #admin-nav{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative;z-index:30;}
+body.admin-only #student-nav{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+body.admin-only #admin-view{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative;z-index:1;}
+body.admin-only #login-view{display:none!important;pointer-events:none!important;}
+body.admin-only #admin-view .admin-tab{cursor:pointer!important;pointer-events:auto!important;position:relative;z-index:31;}
+body.admin-only #admin-view .admin-panel{display:none!important;pointer-events:none!important;}
+body.admin-only #admin-view .admin-panel.active{display:block!important;pointer-events:auto!important;}
+body.admin-only main>.view{display:none!important;}
+body.admin-only main>#game-detail-view.active{display:block!important;pointer-events:auto!important;}
+body.admin-only main>#game-detail-view.active *{pointer-events:auto;}
+body.admin-only main>#game-detail-view.active .back-btn{pointer-events:auto!important;}
+body.admin-only .student-pill{display:flex!important;pointer-events:auto!important;position:relative;z-index:30;}
