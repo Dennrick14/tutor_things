@@ -39,13 +39,16 @@
    document.body.classList.add(profile.role==='admin'?'admin-only':'student-only');
    document.getElementById('login-view').style.display='none';
    document.getElementById('admin-view').style.display=profile.role==='admin'?'block':'none';
-   document.getElementById('admin-nav').style.display=profile.role==='admin'?'flex':'none';
-   document.getElementById('student-nav').style.display=profile.role==='student'?'flex':'none';
+   document.getElementById('admin-nav').style.display='none';
+   document.getElementById('student-nav').style.display='none';
    document.querySelector('.student-pill').style.display='flex';
    document.getElementById('user-label').textContent=(profile.display_name||profile.username)+(profile.role==='admin'?' • Admin':' • Student');
-   if(typeof window.setLoggedIn==='function')window.setLoggedIn({id:data.user.id,username:profile.username,role:profile.role,display:profile.display_name||profile.username});
-   else if(profile.role==='admin'){document.getElementById('dashboard-panel').classList.add('active');}
-   else document.getElementById('assignments-view').classList.add('active');
+   document.getElementById('admin-view').style.display='none';
+   document.querySelectorAll('main>.view').forEach(v=>v.classList.remove('active'));
+   const setup=document.getElementById('setup-view');
+   setup.classList.add('active');
+   setup.style.display='block';
+   window.scrollTo({top:0,behavior:'instant'});
   }catch(err){console.error('Login error',err);errorEl.textContent=err.message==='Invalid login credentials'?'Incorrect username or password.':err.message||'Login failed.';}
   finally{button.disabled=false;button.textContent='Log in';}
  },true);
