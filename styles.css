@@ -189,3 +189,8 @@ body:has(#login-view[style*="display: flex"]) .student-pill,
 body:has(#login-view[style*="display: flex"]) main>.view{display:none!important;}
 body:has(#login-view[style*="display: flex"]) #login-view{display:flex!important;min-height:100vh!important;align-items:center!important;justify-content:center!important;padding:24px 0!important;margin:0!important;}
 body:has(#login-view[style*="display: flex"]) .app-shell{min-height:100vh!important;}
+
+/* Explicit login-visible state: independent of inline display formatting or stale auth classes */
+body.login-visible .topbar,body.login-visible #admin-view,body.login-visible #admin-nav,body.login-visible #student-nav,body.login-visible .student-pill,body.login-visible main>.view{display:none!important;}
+body.login-visible #login-view{display:flex!important;position:relative!important;min-height:100vh!important;width:100%!important;align-items:center!important;justify-content:center!important;margin:0!important;padding:24px!important;}
+body.login-visible .app-shell{min-height:100vh!important;}
