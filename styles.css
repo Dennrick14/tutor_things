@@ -236,3 +236,8 @@ body.admin-only main>#setup-view.active *,body.admin-only main>#game-view.active
 #aim-pointer{z-index:4;pointer-events:none}
 body.admin-only main>#game-detail-view.active,body.admin-only main>#setup-view.active,body.admin-only main>#game-view.active,body.admin-only main>#results-view.active{display:block!important;visibility:visible!important;pointer-events:auto!important}
 body.admin-only main>#game-detail-view.active *,body.admin-only main>#setup-view.active *,body.admin-only main>#game-view.active *,body.admin-only main>#results-view.active *{pointer-events:auto!important}
+
+#targets{display:block!important;position:absolute!important;inset:0!important;z-index:20!important;pointer-events:auto!important}
+#targets button.target-answer{pointer-events:auto!important;position:absolute!important;z-index:21!important;touch-action:manipulation!important;cursor:pointer!important}
+#shooting-field{position:relative!important;z-index:1!important}
+#game-start-overlay[style*="display: none"]{pointer-events:none!important}
