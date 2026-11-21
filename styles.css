@@ -194,3 +194,21 @@ body:has(#login-view[style*="display: flex"]) .app-shell{min-height:100vh!import
 body.login-visible .topbar,body.login-visible #admin-view,body.login-visible #admin-nav,body.login-visible #student-nav,body.login-visible .student-pill,body.login-visible main>.view{display:none!important;}
 body.login-visible #login-view{display:flex!important;position:relative!important;min-height:100vh!important;width:100%!important;align-items:center!important;justify-content:center!important;margin:0!important;padding:24px!important;}
 body.login-visible .app-shell{min-height:100vh!important;}
+
+/* Fresh academic login design */
+:root{--ink:#17263d;--muted:#65748a;--purple:#285b8e;--purple2:#4c78a8;--bg:#f1f5f9;--border:#d9e2ec;--green:#2d7664}
+body{background:#f1f5f9;color:#17263d}
+body.logged-out .topbar,body.login-visible .topbar{display:none!important}
+body.logged-out #admin-view,body.logged-out #admin-nav,body.logged-out #student-nav,body.logged-out .student-pill,body.logged-out main>.view,body.login-visible #admin-view,body.login-visible #admin-nav,body.login-visible #student-nav,body.login-visible .student-pill,body.login-visible main>.view{display:none!important}
+body.logged-out #login-view,body.login-visible #login-view{display:flex!important;min-height:100vh;width:100%;align-items:center;justify-content:center;padding:24px}
+.academic-login{width:min(440px,100%);background:#fff;border:1px solid #d8e2ed;border-radius:20px;padding:42px;box-shadow:0 18px 45px rgba(23,38,61,.08)}
+.login-emblem{width:54px;height:54px;border-radius:14px;background:#234f78;color:white;display:grid;place-items:center;font-size:26px;margin-bottom:18px}
+.login-kicker{color:#2d7664;font-size:12px;font-weight:800;letter-spacing:2px;margin:0 0 10px}
+.academic-login h1{font-family:'Space Grotesk',sans-serif;font-size:34px;margin:0 0 8px;color:#17263d}
+.login-subtitle{color:#65748a;margin:0 0 28px}
+.academic-login form{display:grid;gap:18px}
+.academic-login label{font-size:14px;font-weight:700;color:#253b53;display:grid;gap:8px}
+.academic-login input{height:48px;border:1px solid #cbd7e4;border-radius:10px;padding:0 14px;background:#fff;color:#17263d;outline:none}
+.academic-login input:focus{border-color:#2d7664;box-shadow:0 0 0 3px rgba(45,118,100,.12)}
+.academic-login .primary{background:#234f78;color:white;border-radius:10px;height:48px;font-weight:700}
+.academic-login .primary:hover{background:#1b405f}
