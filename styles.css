@@ -175,3 +175,22 @@ body.admin-only main,body.student-only main{position:relative;z-index:100;}
 body.admin-only main>#setup-view.active,body.student-only main>#setup-view.active{display:block!important;position:relative!important;z-index:1000!important;pointer-events:auto!important;}
 body.admin-only main>#setup-view.active .setup-card,body.student-only main>#setup-view.active .setup-card{position:relative;z-index:1001!important;pointer-events:auto!important;}
 body.admin-only main>#setup-view.active button,body.admin-only main>#setup-view.active select,body.student-only main>#setup-view.active button,body.student-only main>#setup-view.active select{pointer-events:auto!important;position:relative;z-index:1002!important;}
+
+/* Final role navigation and dashboard layout */
+body.admin-only #admin-nav{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative!important;z-index:50!important;}
+body.admin-only #student-nav{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+body.admin-only #admin-view{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative!important;left:auto!important;}
+body.admin-only .topbar nav{display:flex!important;}
+body.admin-only #admin-view .admin-panel{display:none!important;}
+body.admin-only #admin-view .admin-panel.active{display:block!important;pointer-events:auto!important;}
+body.admin-only #login-view{display:none!important;}
+body.admin-only main>.view{display:none!important;}
+body.admin-only .student-pill{display:flex!important;}
+.announcement-form{display:grid;gap:12px;max-width:680px;background:#fff;border:1px solid var(--border);padding:18px;border-radius:16px;margin-bottom:20px}
+.announcement-form label{font-weight:700;font-size:13px;display:grid;gap:6px}
+.announcement-form input,.announcement-form textarea{border:1px solid var(--border);border-radius:10px;padding:11px;font:inherit;resize:vertical}
+.announcement-list{display:grid;gap:12px;margin:16px 0 24px}
+.announcement-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}
+.announcement-item h3{margin:0 0 6px}.announcement-item p{margin:0;white-space:pre-wrap}.announcement-item small{color:var(--muted);display:block;margin-top:8px}
+.student-announcements{margin-bottom:24px}
+.student-announcements h2{margin-bottom:12px}
