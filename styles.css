@@ -224,3 +224,7 @@ body.logged-out .app-shell,body.login-visible .app-shell{display:none!important;
 body.logged-out #login-view,body.login-visible #login-view{display:flex!important;position:fixed!important;inset:0!important;z-index:999999!important;width:100vw!important;height:100vh!important;min-height:100vh!important;margin:0!important;padding:24px!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;background:#f1f5f9!important}
 body.admin-only #login-view,body.student-only #login-view{display:none!important;visibility:hidden!important;pointer-events:none!important}
 body.admin-only .app-shell,body.student-only .app-shell{display:block!important;visibility:visible!important;pointer-events:auto!important}
+
+/* Admins can open and play the game views from the Games tab */
+body.admin-only main>#setup-view.active,body.admin-only main>#game-view.active,body.admin-only main>#results-view.active{display:block!important;visibility:visible!important;pointer-events:auto!important;}
+body.admin-only main>#setup-view.active *,body.admin-only main>#game-view.active *,body.admin-only main>#results-view.active *{pointer-events:auto!important;}
