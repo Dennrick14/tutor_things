@@ -228,3 +228,11 @@ body.admin-only .app-shell,body.student-only .app-shell{display:block!important;
 /* Admins can open and play the game views from the Games tab */
 body.admin-only main>#setup-view.active,body.admin-only main>#game-view.active,body.admin-only main>#results-view.active{display:block!important;visibility:visible!important;pointer-events:auto!important;}
 body.admin-only main>#setup-view.active *,body.admin-only main>#game-view.active *,body.admin-only main>#results-view.active *{pointer-events:auto!important;}
+
+/* Shooter targets remain independently clickable */
+.shooting-field{position:relative;isolation:isolate}
+#targets{position:absolute;inset:0;z-index:2;pointer-events:auto}
+#targets .target-answer{position:absolute;z-index:3;pointer-events:auto;cursor:pointer;touch-action:manipulation}
+#aim-pointer{z-index:4;pointer-events:none}
+body.admin-only main>#game-detail-view.active,body.admin-only main>#setup-view.active,body.admin-only main>#game-view.active,body.admin-only main>#results-view.active{display:block!important;visibility:visible!important;pointer-events:auto!important}
+body.admin-only main>#game-detail-view.active *,body.admin-only main>#setup-view.active *,body.admin-only main>#game-view.active *,body.admin-only main>#results-view.active *{pointer-events:auto!important}
