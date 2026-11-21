@@ -179,3 +179,13 @@ body.student-only main>.view{display:none!important;}
 body.student-only main>.view.active{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;}
 body.student-only main>.view.active *{pointer-events:auto;}
 body.admin-only main>.view.active{display:none!important;}
+
+/* Login screen is isolated from the portal header */
+body:has(#login-view[style*="display: flex"]) .topbar{display:none!important;}
+body:has(#login-view[style*="display: flex"]) #admin-view,
+body:has(#login-view[style*="display: flex"]) #admin-nav,
+body:has(#login-view[style*="display: flex"]) #student-nav,
+body:has(#login-view[style*="display: flex"]) .student-pill,
+body:has(#login-view[style*="display: flex"]) main>.view{display:none!important;}
+body:has(#login-view[style*="display: flex"]) #login-view{display:flex!important;min-height:100vh!important;align-items:center!important;justify-content:center!important;padding:24px 0!important;margin:0!important;}
+body:has(#login-view[style*="display: flex"]) .app-shell{min-height:100vh!important;}
