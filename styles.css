@@ -212,3 +212,8 @@ body.logged-out #login-view,body.login-visible #login-view{display:flex!importan
 .academic-login input:focus{border-color:#2d7664;box-shadow:0 0 0 3px rgba(45,118,100,.12)}
 .academic-login .primary{background:#234f78;color:white;border-radius:10px;height:48px;font-weight:700}
 .academic-login .primary:hover{background:#1b405f}
+
+/* Rebuilt login page is outside the portal DOM */
+body.logged-out .app-shell,body.login-visible .app-shell{display:none!important}
+body.logged-out #login-view,body.login-visible #login-view{display:flex!important;position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;align-items:center!important;justify-content:center!important;padding:24px!important;margin:0!important;z-index:99999!important;background:#f1f5f9!important}
+body.admin-only #login-view,body.student-only #login-view{display:none!important}
