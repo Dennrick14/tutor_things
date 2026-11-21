@@ -217,3 +217,10 @@ body.logged-out #login-view,body.login-visible #login-view{display:flex!importan
 body.logged-out .app-shell,body.login-visible .app-shell{display:none!important}
 body.logged-out #login-view,body.login-visible #login-view{display:flex!important;position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;min-height:100vh!important;align-items:center!important;justify-content:center!important;padding:24px!important;margin:0!important;z-index:99999!important;background:#f1f5f9!important}
 body.admin-only #login-view,body.student-only #login-view{display:none!important}
+
+/* State isolation: login and portal are mutually exclusive containers */
+body.logged-out,body.login-visible{min-height:100vh;overflow-x:hidden}
+body.logged-out .app-shell,body.login-visible .app-shell{display:none!important;visibility:hidden!important;pointer-events:none!important}
+body.logged-out #login-view,body.login-visible #login-view{display:flex!important;position:fixed!important;inset:0!important;z-index:999999!important;width:100vw!important;height:100vh!important;min-height:100vh!important;margin:0!important;padding:24px!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;background:#f1f5f9!important}
+body.admin-only #login-view,body.student-only #login-view{display:none!important;visibility:hidden!important;pointer-events:none!important}
+body.admin-only .app-shell,body.student-only .app-shell{display:block!important;visibility:visible!important;pointer-events:auto!important}
