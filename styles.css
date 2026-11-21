@@ -156,41 +156,26 @@ body.admin-only main>#game-detail-view.active *{pointer-events:auto;}
 body.admin-only main>#game-detail-view.active .back-btn{pointer-events:auto!important;}
 body.admin-only .student-pill{display:flex!important;pointer-events:auto!important;position:relative;z-index:30;}
 
-/* TEMPORARY GAME FIRST MODE: keep portal code intact, hide its interface */
-body.admin-only #admin-nav,body.student-only #student-nav{display:none!important;}
-body.admin-only #admin-view,body.student-only #admin-view{display:none!important;}
-body.admin-only main>.view,body.student-only main>.view{display:none!important;}
-body.admin-only main>#setup-view.active,body.student-only main>#setup-view.active{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative;z-index:2;}
-body.admin-only main>#setup-view.active *,body.student-only main>#setup-view.active *{pointer-events:auto!important;}
-body.admin-only main>#game-view.active,body.student-only main>#game-view.active,body.admin-only main>#results-view.active,body.student-only main>#results-view.active,body.admin-only main>#game-detail-view.active,body.student-only main>#game-detail-view.active{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative;z-index:2;}
-body.admin-only main>.view.active,body.student-only main>.view.active{display:block!important;}
 
-/* GAME TEST MODE: eliminate all portal layers from interaction */
-body.admin-only,body.student-only{overflow-x:hidden;}
-body.admin-only #admin-view,body.student-only #admin-view{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;position:absolute!important;left:-99999px!important;}
-body.admin-only #admin-nav,body.student-only #student-nav{display:none!important;visibility:hidden!important;pointer-events:none!important;}
-body.admin-only .student-pill,body.student-only .student-pill{display:none!important;}
-body.admin-only .topbar nav,body.student-only .topbar nav{display:none!important;}
-body.admin-only main,body.student-only main{position:relative;z-index:100;}
-body.admin-only main>#setup-view.active,body.student-only main>#setup-view.active{display:block!important;position:relative!important;z-index:1000!important;pointer-events:auto!important;}
-body.admin-only main>#setup-view.active .setup-card,body.student-only main>#setup-view.active .setup-card{position:relative;z-index:1001!important;pointer-events:auto!important;}
-body.admin-only main>#setup-view.active button,body.admin-only main>#setup-view.active select,body.student-only main>#setup-view.active button,body.student-only main>#setup-view.active select{pointer-events:auto!important;position:relative;z-index:1002!important;}
-
-/* Final role navigation and dashboard layout */
-body.admin-only #admin-nav{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative!important;z-index:50!important;}
-body.admin-only #student-nav{display:none!important;visibility:hidden!important;pointer-events:none!important;}
-body.admin-only #admin-view{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:relative!important;left:auto!important;}
-body.admin-only .topbar nav{display:flex!important;}
-body.admin-only #admin-view .admin-panel{display:none!important;}
-body.admin-only #admin-view .admin-panel.active{display:block!important;pointer-events:auto!important;}
-body.admin-only #login-view{display:none!important;}
-body.admin-only main>.view{display:none!important;}
-body.admin-only .student-pill{display:flex!important;}
-.announcement-form{display:grid;gap:12px;max-width:680px;background:#fff;border:1px solid var(--border);padding:18px;border-radius:16px;margin-bottom:20px}
-.announcement-form label{font-weight:700;font-size:13px;display:grid;gap:6px}
-.announcement-form input,.announcement-form textarea{border:1px solid var(--border);border-radius:10px;padding:11px;font:inherit;resize:vertical}
-.announcement-list{display:grid;gap:12px;margin:16px 0 24px}
-.announcement-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px}
-.announcement-item h3{margin:0 0 6px}.announcement-item p{margin:0;white-space:pre-wrap}.announcement-item small{color:var(--muted);display:block;margin-top:8px}
-.student-announcements{margin-bottom:24px}
-.student-announcements h2{margin-bottom:12px}
+/* Definitive role and navigation visibility */
+body.logged-out .topbar{display:none!important;}
+body.logged-out #admin-view,body.logged-out #admin-nav,body.logged-out #student-nav,body.logged-out .student-pill,body.logged-out main>.view{display:none!important;}
+body.logged-out #login-view{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;min-height:calc(100vh - 40px);align-items:center;justify-content:center;}
+body.logged-out .login-card{position:relative;z-index:2;}
+body.admin-only .topbar{display:flex!important;}
+body.admin-only #admin-nav{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;}
+body.admin-only #student-nav{display:none!important;}
+body.admin-only .student-pill{display:flex!important;pointer-events:auto!important;}
+body.admin-only #login-view,body.admin-only main>.view{display:none!important;}
+body.admin-only #admin-view{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:static!important;left:auto!important;z-index:auto!important;}
+body.admin-only #admin-view .admin-panel{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+body.admin-only #admin-view .admin-panel.active{display:block!important;visibility:visible!important;pointer-events:auto!important;}
+body.admin-only #admin-nav button{pointer-events:auto!important;cursor:pointer!important;}
+body.student-only .topbar{display:flex!important;}
+body.student-only #admin-nav,body.student-only #admin-view{display:none!important;}
+body.student-only #student-nav,body.student-only .student-pill{display:flex!important;pointer-events:auto!important;}
+body.student-only #login-view{display:none!important;}
+body.student-only main>.view{display:none!important;}
+body.student-only main>.view.active{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;}
+body.student-only main>.view.active *{pointer-events:auto;}
+body.admin-only main>.view.active{display:none!important;}
