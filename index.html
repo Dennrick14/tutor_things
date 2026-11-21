@@ -19,31 +19,4 @@
 </div>
 <section id="login-view" class="login-view"><div class="login-card academic-login"><div class="login-emblem">✦</div><p class="login-kicker">TUTOR THINGS</p><h1>Welcome back</h1><p class="login-subtitle">Sign in to your learning portal</p><form id="login-form"><label>Username<input id="login-username" autocomplete="username" required placeholder="Enter your username"></label><label>Password<input id="login-password" type="password" autocomplete="current-password" required placeholder="Enter your password"></label><p id="login-error" class="login-error"></p><button class="primary full" type="submit">Sign in</button></form></div></section>
 <div class="modal-backdrop" id="assignment-modal"><div class="modal"><button class="modal-close" id="modal-close">×</button><p class="eyebrow">TUTOR TOOL</p><h2>Post an assignment</h2><form id="assignment-form"><label>Assignment title<input required id="assignment-title" placeholder="e.g. Multiplication practice"></label><label>Subject or topic<input id="assignment-topic" placeholder="e.g. Mathematics"></label><label>Instructions<textarea required id="assignment-instructions" rows="4" placeholder="What should the student do?"></textarea></label><label>Due date<input type="date" id="assignment-due"></label><label>Attachment<input type="file" id="assignment-file"></label><button class="primary full" type="submit">Post assignment</button></form></div></div><div class="modal-backdrop" id="student-assignment-modal"><div class="modal"><button class="modal-close" id="student-modal-close">×</button><p class="eyebrow">STUDENT PROFILE</p><h2>Add assignment</h2><form id="profile-assignment-form"><label>Assignment title<input required id="profile-assignment-title"></label><label>Subject or topic<input id="profile-assignment-topic"></label><label>Instructions<textarea required id="profile-assignment-instructions" rows="4"></textarea></label><label>Due date<input type="date" id="profile-assignment-due"></label><button class="primary full" type="submit">Assign to student</button></form></div></div>
-<script>
-(function(){
- const form=document.getElementById('login-form');
- if(!form)return;
- form.addEventListener('submit',async function(ev){
-  ev.preventDefault();ev.stopImmediatePropagation();
-  const errorEl=document.getElementById('login-error'),userEl=document.getElementById('login-username'),passEl=document.getElementById('login-password'),button=form.querySelector('button[type="submit"]');
-  const username=(userEl.value||'').trim().toLowerCase(),password=passEl.value;
-  errorEl.textContent='';
-  if(!window.supabase||!window.supabase.createClient){errorEl.textContent='Authentication service is unavailable. Please reload.';return;}
-  button.disabled=true;button.textContent='Logging in…';
-  try{
-   const client=window.__tutorThingsAuthClient||(window.__tutorThingsAuthClient=window.supabase.createClient('https://ufnmkcrgrrxphfqeesbi.supabase.co','sb_publishable_obGdljNPRBZbLPG90g1Wtw_txa9e6JT'));
-   const {data,error}=await client.auth.signInWithPassword({email:username+'@tutorthings.local',password});
-   if(error)throw error;
-   const {data:profile,error:profileError}=await client.from('profiles').select('id,role,username,display_name').eq('id',data.user.id).single();
-   if(profileError||!profile||!['admin','student'].includes(profile.role))throw new Error('Account profile is missing or invalid.');
-   document.body.classList.remove('logged-out','admin-only','student-only');
-   document.body.classList.add(profile.role==='admin'?'admin-only':'student-only');
-   document.getElementById('login-view').style.display='none';
-   document.getElementById('admin-view').style.display=profile.role==='admin'?'block':'none';
-   document.getElementById('admin-nav').style.display=profile.role==='admin'?'flex':'none';document.getElementById('student-nav').style.display=profile.role==='student'?'flex':'none';document.querySelector('.student-pill').style.display='flex';document.getElementById('user-label').textContent=(profile.display_name||profile.username)+(profile.role==='admin'?' • Admin':' • Student');document.querySelectorAll('main>.view').forEach(v=>v.classList.remove('active'));if(profile.role==='admin'){document.getElementById('admin-view').style.display='block';document.querySelector('#assignments-view').classList.add('active');}else document.getElementById('assignments-view').classList.add('active');
-  }catch(err){console.error('Login error',err);errorEl.textContent=err.message==='Invalid login credentials'?'Incorrect username or password.':err.message||'Login failed.';}
-  finally{button.disabled=false;button.textContent='Log in';}
- },true);
-})();
-</script>
 <script src="app.js"></script></body></html>
